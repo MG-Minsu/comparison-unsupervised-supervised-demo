@@ -15,27 +15,7 @@ import time
 def app():
 
     st.subheader('K-means clustering applied to the diabetes Dataset')
-    text = """This is a classic example of unsupervised learning task. The diabetes dataset contains 
-    information about diabetes flowers (sepal length, sepal width, petal length, petal width) but 
-    doesn't have labels indicating the flower species (diabetes Setosa, diabetes Versicolor, 
-    diabetes Virginica). K-means doesn't use these labels during clustering.
-    \n* **K-means Clustering:** The algorithm aims to group data points into a predefined 
-    number of clusters (k). It iteratively assigns each data point to the nearest cluster 
-    centroid (center) and recomputes the centroids based on the assigned points. This process 
-    minimizes the within-cluster distances, creating groups with similar characteristics.
-    In essence, K-means helps uncover inherent groupings within the diabetes data based on their 
-    features (measurements) without relying on predefined categories (flower species). 
-    This allows us to explore how well the data separates into natural clusters, potentially 
-    corresponding to the actual flower species.
-    \n* Choosing the optimal number of clusters (k) is crucial. The "elbow method" 
-    helps visualize the trade-off between increasing clusters and decreasing improvement 
-    in within-cluster distances.
-    * K-means is sensitive to initial centroid placement. Running the algorithm multiple times 
-    with different initializations can help identify more stable clusters.
-    By applying K-means to the diabetes dataset, we gain insights into the data's underlying structure 
-    and potentially validate the separability of the known flower species based on their 
-    measured characteristics."""
-    st.write(text)
+    
 
 
     if st.button("Begin"):
