@@ -97,9 +97,10 @@ def app():
             ax.scatter(X[indices, 0], X[indices, 1], label=diabetes.target_names[label], c=color)
 
         # Add labels and title using ax methods
-        ax.set_xlabel('bmi')
-        ax.set_ylabel('bp')
-        ax.set_title('Visualization of Handwritten diabetes Dataset')
+        ax.set_xlabel('BMI')
+        ax.set_ylabel('Blood Pressure')
+        ax.set_title('Visualization of Diabetes Dataset')
+
 
         # Add legend and grid using ax methods
         ax.legend()
