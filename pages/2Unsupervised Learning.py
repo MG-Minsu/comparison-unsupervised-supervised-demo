@@ -90,15 +90,21 @@ def app():
 
         fig, ax = plt.subplots(figsize=(8, 6))
 
-        for label, color in zip(unique_labels, colors):
-            indices = y_pred == label
-            # Use ax.scatter for consistent plotting on the created axis
-            ax.scatter(X[indices, 0], X[indices, 1], label=diabetes.target_names[label], c=color)
+        selected_feature_index = 2  
+        selected_feature = diabetes.feature_names[selected_feature_index]
 
-        # Add labels and title using ax methods
-        ax.set_xlabel('Sepal length (cm)')
-        ax.set_ylabel('Sepal width (cm)')
-        ax.set_title('Sepal Length vs Width Colored by Predicted diabetes Species')
+        selected_feature_index1 = 3  
+        selected_feature1 = diabetes.feature_names[selected_feature_index1]
+
+        # Plotting the selected feature against the target
+        fig, ax = plt.subplots(figsize=(8, 6))
+        ax.scatter(X[:, selected_feature_index], y, c='blue', label='Actual Diabetes Progression')
+        ax.scatter(X[:, selected_feature_index], y_pred, c='red', label='Predicted Diabetes Progression')
+        ax.set_xlabel(selected_feature)
+        ax.set_ylabel(selected_feature1)
+        ax.set_title(f'Visualization of Diabetes Dataset: {selected_feature} vs  {selected_feature1}')
+        ax.legend()
+        st.pyplot(fig)
 
         # Add legend and grid using ax methods
         ax.legend()
