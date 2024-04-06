@@ -64,9 +64,9 @@ def app():
 
     if st.button("Begin"):
         # Load the Iris dataset
-        iris = datasets.load_iris()
-        X = iris.data  # Features
-        y = iris.target  # Target labels (species)
+        digits = datasets.load_digits()
+        X = digits.data  # Features
+        y = digits.target  # Target labels (species)
 
         # KNN for supervised classification (reference for comparison)
 
@@ -93,12 +93,12 @@ def app():
         for label, color in zip(unique_labels, colors):
             indices = y_pred == label
             # Use ax.scatter for consistent plotting on the created axis
-            ax.scatter(X[indices, 0], X[indices, 1], label=iris.target_names[label], c=color)
+            ax.scatter(X[indices, 0], X[indices, 1], label=digits.target_names[label], c=color)
 
         # Add labels and title using ax methods
-        ax.set_xlabel('Sepal length (cm)')
-        ax.set_ylabel('Sepal width (cm)')
-        ax.set_title('Sepal Length vs Width Colored by Predicted Iris Species')
+        ax.set_xlabel('Principal Component 1')
+        ax.set_ylabel('Principal Component 2')
+        ax.set_title('Visualization of Handwritten Digits Dataset')
 
         # Add legend and grid using ax methods
         ax.legend()
