@@ -88,8 +88,7 @@ def app():
         unique_labels = list(set(y_pred))
         colors = plt.cm.get_cmap('viridis')(np.linspace(0, 1, len(unique_labels)))
 
-        fig, ax = plt.subplots(figsize=(8, 6))
-
+        
         selected_feature_index = 2  
         selected_feature = diabetes.feature_names[selected_feature_index]
 
