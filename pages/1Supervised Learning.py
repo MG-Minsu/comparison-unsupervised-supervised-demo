@@ -72,13 +72,16 @@ def app():
         selected_feature_index = 2  # Choose the index of the feature you want to plot against the target
         selected_feature = diabetes.feature_names[selected_feature_index]
 
+        selected_feature_index1 = 3  # Choose the index of the feature you want to plot against the target
+        selected_feature1 = diabetes.feature_names[selected_feature_index1]
+
         # Plotting the selected feature against the target
         fig, ax = plt.subplots(figsize=(8, 6))
         ax.scatter(X[:, selected_feature_index], y, c='blue', label='Actual Diabetes Progression')
         ax.scatter(X[:, selected_feature_index], y_pred, c='red', label='Predicted Diabetes Progression')
         ax.set_xlabel(selected_feature)
-        ax.set_ylabel('Diabetes Progression')
-        ax.set_title(f'Visualization of Diabetes Dataset: {selected_feature} vs Diabetes Progression')
+        ax.set_ylabel(selected_feature1)
+        ax.set_title(f'Visualization of Diabetes Dataset: {selected_feature} vs  {selected_feature1}')
         ax.legend()
         st.pyplot(fig)
 
