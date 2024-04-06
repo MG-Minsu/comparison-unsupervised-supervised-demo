@@ -94,7 +94,7 @@ def app():
         for label, color in zip(unique_labels, colors):
             indices = y_pred == label
             # Use ax.scatter for consistent plotting on the created axis
-            ax.scatter(X[indices, 3], X[indices, 4], label=digits.target_names[label], c=color)
+            ax.scatter(X[indices, 2], X[indices, 3], label=digits.target_names[label], c=color)
 
         # Add labels and title using ax methods
         ax.set_xlabel('Body Mass Index (BMI)')
