@@ -66,13 +66,11 @@ def app():
         st.subheader('Performance Metrics')
         st.text(classification_report(y, y_pred))
 
-        # Since the dataset has multiple features, plotting them against each other may not be meaningful.
-        # Thus, let's select a single feature and plot it against the target (diabetes progression).
 
-        selected_feature_index = 2  # Choose the index of the feature you want to plot against the target
+        selected_feature_index = 2  
         selected_feature = diabetes.feature_names[selected_feature_index]
 
-        selected_feature_index1 = 3  # Choose the index of the feature you want to plot against the target
+        selected_feature_index1 = 3  
         selected_feature1 = diabetes.feature_names[selected_feature_index1]
 
         # Plotting the selected feature against the target
