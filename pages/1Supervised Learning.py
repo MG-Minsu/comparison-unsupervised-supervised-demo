@@ -98,8 +98,8 @@ def app():
 
 
         # Add labels and title using ax methods
-        ax.set_xlabel('BMI')
-        ax.set_ylabel('BP')
+        ax.set_xlabel('age')
+        ax.set_ylabel('sex')
         ax.set_title('Visualization of Diabetes Dataset')
 
 
