@@ -94,7 +94,7 @@ def app():
         for label, color in zip(unique_labels, colors):
             indices = y_pred == label
             # Use ax.scatter for consistent plotting on the created axis
-            ax.scatter(X[indices, 0], X[indices, 1], label=digits.target_names[label], c=color)
+            ax.scatter(X[indices, 0], X[indices, 1], label=label, c=color)  # Change digits.target_names[label] to label
 
         # Add labels and title using ax methods
         ax.set_xlabel('Principal Component 1')
