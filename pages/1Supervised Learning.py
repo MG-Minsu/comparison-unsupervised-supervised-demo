@@ -11,34 +11,7 @@ import time
 # Define the Streamlit app
 def app():
     st.subheader('Supervised Learning, Classification, and KNN with Diabetes Dataset')
-    text = """**Supervised Learning:**
-    \nSupervised learning is a branch of machine learning where algorithms learn from labeled data. 
-    This data consists of input features (X) and corresponding outputs or labels (y). The algorithm learns a 
-    mapping function from the input features to the outputs, allowing it to predict the labels for 
-    unseen data points.
-    \n**Classification:**
-    Classification is a specific task within supervised learning where the labels belong to discrete 
-    categories. The goal is to build a model that can predict the category label of a new data 
-    point based on its features.
-    \n**K-Nearest Neighbors (KNN):**
-    KNN is a simple yet powerful algorithm for both classification and regression tasks. 
-    \n**The Diabetes Dataset:**
-    The Diabetes dataset contains ten baseline variables, age, sex, body mass index, average blood pressure, and six blood serum measurements for 442 diabetes patients.
-    \n**KNN Classification with Diabetes:**
-    \n1. **Training:**
-    * The KNN algorithm stores the entire Diabetes dataset (features and labels) as its training data.
-    \n2. **Prediction:**
-    * When presented with a new patient, KNN calculates the distance (often Euclidean distance) between this patient's features and all the patients in the training data.
-    * The user defines the value of 'k' (number of nearest neighbors). KNN identifies the 'k' closest data points (patients) in the training set to the new patient.
-    * KNN predicts the diabetes progression for the new patient based on the majority vote among its 'k' nearest neighbors. For example, if three out of the five nearest neighbors have a high diabetes progression, the new patient is classified as having high diabetes progression.
-    **Choosing 'k':**
-    The value of 'k' significantly impacts KNN performance. A small 'k' value might lead to overfitting, where the model performs well on the training data but poorly on unseen data. Conversely, a large 'k' value might not capture the local patterns in the data and lead to underfitting. The optimal 'k' value is often determined through experimentation.
-    \n**Advantages of KNN:**
-    * Simple to understand and implement.
-    * No complex model training required.
-    * Effective for datasets with well-defined clusters."""
-    st.write(text)
-
+   
     k = st.sidebar.slider(
         label="Select the value of k:",
         min_value= 2,
