@@ -105,10 +105,7 @@ def app():
         ax.legend()
         st.pyplot(fig)
 
-        # Add legend and grid using ax methods
-        ax.legend()
-        ax.grid(True)
-        st.pyplot(fig)
+       
 
 
 #run the app
