@@ -9,7 +9,7 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import classification_report
 from sklearn import datasets, metrics
-from sklearn.datasets import load_diabates
+from sklearn.datasets import load_diabetes
 import time
 
 # Define the Streamlit app
@@ -65,9 +65,9 @@ def app():
 
     if st.button("Begin"):
         # Load the Iris dataset
-        diabates = datasets.load_diabetes()
-        X = diabates.data  # Features
-        y = diabates.target  # Target labels (species)
+        diabetes = datasets.load_diabetes()
+        X = diabetes.data  # Features
+        y = diabetes.target  # Target labels (species)
 
         # KNN for supervised classification (reference for comparison)
 
@@ -94,12 +94,12 @@ def app():
         for label, color in zip(unique_labels, colors):
             indices = y_pred == label
             # Use ax.scatter for consistent plotting on the created axis
-            ax.scatter(X[indices, 0], X[indices, 1], label=diabates.target_names[label], c=color)
+            ax.scatter(X[indices, 0], X[indices, 1], label=diabetes.target_names[label], c=color)
 
         # Add labels and title using ax methods
         ax.set_xlabel('bmi')
         ax.set_ylabel('bp')
-        ax.set_title('Visualization of Handwritten diabates Dataset')
+        ax.set_title('Visualization of Handwritten diabetes Dataset')
 
         # Add legend and grid using ax methods
         ax.legend()
