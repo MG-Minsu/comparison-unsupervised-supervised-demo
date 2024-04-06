@@ -1,21 +1,16 @@
-re#Input the relevant libraries
+# Input the relevant libraries
 import numpy as np
 import pandas as pd
 import streamlit as st
-import altair as alt
 import matplotlib.pyplot as plt
-import seaborn as sns
 from sklearn.neighbors import KNeighborsClassifier
-from sklearn.metrics import confusion_matrix
-from sklearn.metrics import classification_report
-from sklearn import datasets, metrics
-from sklearn.datasets import load_diabetes
+from sklearn.metrics import confusion_matrix, classification_report
+from sklearn import datasets
 import time
 
 # Define the Streamlit app
 def app():
-
-    st.subheader('Supervised Learning, Classification, and KNN with Iris Dataset')
+    st.subheader('Supervised Learning, Classification, and KNN with Diabetes Dataset')
     text = """**Supervised Learning:**
     \nSupervised learning is a branch of machine learning where algorithms learn from labeled data. 
     This data consists of input features (X) and corresponding outputs or labels (y). The algorithm learns a 
@@ -27,35 +22,23 @@ def app():
     point based on its features.
     \n**K-Nearest Neighbors (KNN):**
     KNN is a simple yet powerful algorithm for both classification and regression tasks. 
-    \n**The Iris Dataset:**
-    The Iris dataset is a popular benchmark dataset in machine learning. It contains information about 150 
-    iris flowers from three different species: Iris Setosa, Iris Versicolor, and Iris Virginica. 
-    Each flower is described by four features:
-    * Sepal length (cm)
-    * Sepal width (cm)
-    * Petal length (cm)
-    * Petal width (cm)
-    \n**KNN Classification with Iris:**
+    \n**The Diabetes Dataset:**
+    The Diabetes dataset contains ten baseline variables, age, sex, body mass index, average blood pressure, and six blood serum measurements for 442 diabetes patients.
+    \n**KNN Classification with Diabetes:**
     \n1. **Training:**
-    * The KNN algorithm stores the entire Iris dataset (features and labels) as its training data.
+    * The KNN algorithm stores the entire Diabetes dataset (features and labels) as its training data.
     \n2. **Prediction:**
-    * When presented with a new iris flower (unknown species), KNN calculates the distance (often Euclidean distance) 
-    between this flower's features and all the flowers in the training data.
-    * The user defines the value of 'k' (number of nearest neighbors). KNN identifies the 'k' closest 
-    data points (flowers) in the training set to the new flower.
-    * KNN predicts the class label (species) for the new flower based on the majority vote among its 
-    'k' nearest neighbors. For example, if three out of the five nearest neighbors belong to Iris Setosa, 
-    the new flower is classified as Iris Setosa.
+    * When presented with a new patient, KNN calculates the distance (often Euclidean distance) between this patient's features and all the patients in the training data.
+    * The user defines the value of 'k' (number of nearest neighbors). KNN identifies the 'k' closest data points (patients) in the training set to the new patient.
+    * KNN predicts the diabetes progression for the new patient based on the majority vote among its 'k' nearest neighbors. For example, if three out of the five nearest neighbors have a high diabetes progression, the new patient is classified as having high diabetes progression.
     **Choosing 'k':**
-    The value of 'k' significantly impacts KNN performance. A small 'k' value might lead to overfitting, where the 
-    model performs well on the training data but poorly on unseen data. Conversely, a large 'k' value might not 
-    capture the local patterns in the data and lead to underfitting. The optimal 'k' value is often determined 
-    through experimentation.
+    The value of 'k' significantly impacts KNN performance. A small 'k' value might lead to overfitting, where the model performs well on the training data but poorly on unseen data. Conversely, a large 'k' value might not capture the local patterns in the data and lead to underfitting. The optimal 'k' value is often determined through experimentation.
     \n**Advantages of KNN:**
     * Simple to understand and implement.
     * No complex model training required.
     * Effective for datasets with well-defined clusters."""
     st.write(text)
+
     k = st.sidebar.slider(
         label="Select the value of k:",
         min_value= 2,
@@ -64,51 +47,41 @@ def app():
     )
 
     if st.button("Begin"):
-        # Load the Iris dataset
+        # Load the Diabetes dataset
         diabetes = datasets.load_diabetes()
         X = diabetes.data  # Features
-        y = diabetes.target  # Target labels (species)
+        y = diabetes.target  # Target labels
 
         # KNN for supervised classification (reference for comparison)
-
-        # Define the KNN classifier with k=5 neighbors
         knn = KNeighborsClassifier(n_neighbors=k)
-
-        # Train the KNN model
         knn.fit(X, y)
 
-        # Predict the cluster labels for the data
+        # Predict the diabetes progression for the patients
         y_pred = knn.predict(X)
+
         st.write('Confusion Matrix')
         cm = confusion_matrix(y, y_pred)
         st.text(cm)
+
         st.subheader('Performance Metrics')
         st.text(classification_report(y, y_pred))
 
-        # Get unique class labels and color map
-        unique_labels = list(set(y_pred))
-        colors = plt.cm.get_cmap('viridis')(np.linspace(0, 1, len(unique_labels)))
+        # Since the dataset has multiple features, plotting them against each other may not be meaningful.
+        # Thus, let's select a single feature and plot it against the target (diabetes progression).
 
+        selected_feature_index = 2  # Choose the index of the feature you want to plot against the target
+        selected_feature = diabetes.feature_names[selected_feature_index]
+
+        # Plotting the selected feature against the target
         fig, ax = plt.subplots(figsize=(8, 6))
-
-        for label, color in zip(unique_labels, colors):
-            indices = y_pred == label
-            # Use ax.scatter for consistent plotting on the created axis
-            ax.scatter(X[indices, 0], X[indices, 1], label=diabetes.feature_names[label], c=color)
-
-
-        # Add labels and title using ax methods
-        ax.set_xlabel('age')
-        ax.set_ylabel('sex')
-        ax.set_title('Visualization of Diabetes Dataset')
-
-
-        # Add legend and grid using ax methods
+        ax.scatter(X[:, selected_feature_index], y, c='blue', label='Actual Diabetes Progression')
+        ax.scatter(X[:, selected_feature_index], y_pred, c='red', label='Predicted Diabetes Progression')
+        ax.set_xlabel(selected_feature)
+        ax.set_ylabel('Diabetes Progression')
+        ax.set_title(f'Visualization of Diabetes Dataset: {selected_feature} vs Diabetes Progression')
         ax.legend()
-        ax.grid(True)
         st.pyplot(fig)
 
-
-#run the app
+# Run the app
 if __name__ == "__main__":
     app()
