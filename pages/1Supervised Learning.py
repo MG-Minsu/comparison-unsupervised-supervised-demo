@@ -9,6 +9,7 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import classification_report
 from sklearn import datasets, metrics
+from sklearn.datasets import load_digit
 import time
 
 # Define the Streamlit app
